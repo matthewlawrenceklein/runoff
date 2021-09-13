@@ -2,14 +2,24 @@
     export let url
     export let photo
     import { onMount } from 'svelte'
+    $: photoConcat = null 
+    $: showDescriptionDetails = false
     
     onMount(() => {
+        if (photo.data()['description'].length > 100){
+            photoConcat = photo.data()['description'].slice(0,120) + '...'
+            showDescriptionDetails = true 
+        }
     })
 </script>
     <div class='card'>
         <h1>{photo.data()['title']}</h1>
         <p>{new Date(1000 * photo.data()['postDate']) }</p>
-        <p>{photo.data()['description']}</p>
+        {#if photoConcat}
+            <p>{photoConcat}</p>
+        {:else}
+             <p>{photo.data()['description']}</p>
+        {/if}
         <div class='image-container'>
             <img src={url} class='image' alt='photostream item'/>
         </div>
@@ -37,6 +47,28 @@
     h1{
         text-align: center;
     }
+
+    @media (max-width: 575.98px) { 
+        h1{
+            font-size: medium;
+        }
+
+        p {
+            font-size: smaller;
+        }
+        .card{
+            width: 400px;
+            height: 400px;
+            margin: 40px;
+            background-color: #141921;
+            color: white;
+        }
+        .image{
+            max-width: 380px;
+            max-height: 210px;
+            object-fit: contain;
+        }
+	}
     /* your styles go here */
 </style>
 

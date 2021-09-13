@@ -20,6 +20,16 @@
         margin-top: 50px;
         border-radius: 15px;
     }
+    @media (max-width: 575.98px) { 
+        .container{
+            height: 220;
+            width: 400px;
+            background-color: #141921;
+            color: white;
+            margin-top: 50px;
+            border-radius: 15px;
+        }
+	}
 
     h3{
         text-align: center;

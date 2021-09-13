@@ -43,10 +43,19 @@
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
-		width: 30vw;
+		width: 100vw;
 	}
+
+	@media (max-width: 575.98px) { 
+		.secret{
+			height: 90px;
+			width: 95vw;
+		}
+	}
+	
 
 	.secret{
 		height: 90px;
+		width: 70vw;
 	}
 </style>

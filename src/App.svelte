@@ -3,8 +3,6 @@
 	import Admin from './Admin.svelte'
 	import Photostream from './Photostream.svelte'
 
-	let regularAccess = false 
-	let superAccess = false
 	let userInput = '' 
 	$: accessType = writable(null)
 

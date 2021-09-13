@@ -7,9 +7,9 @@
 	$: accessType = writable(null)
 
 	$: loginUser = () => {
-		if(userInput === 'admin'){
+		if(userInput.toLowerCase() === 'admin'){
 			accessType.set('admin')
-		} else if (userInput === 'pass'){
+		} else if (userInput.toLowerCase() === 'pass'){
 			accessType.set('standard')
 		}
 	}

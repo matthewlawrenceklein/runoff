@@ -23,7 +23,7 @@
     @media (max-width: 575.98px) { 
         .container{
             height: 220;
-            width: 400px;
+            width: 380px;
             background-color: #141921;
             color: white;
             margin-top: 50px;

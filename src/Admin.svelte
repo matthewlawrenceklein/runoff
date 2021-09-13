@@ -75,7 +75,7 @@
     @media (max-width: 575.98px){
         .container{
             justify-content: center;
-            width: 400px;
+            width: 380px;
             align-items: center;
             background-color: #141921
         }

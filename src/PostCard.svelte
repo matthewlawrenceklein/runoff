@@ -57,14 +57,14 @@
             font-size: smaller;
         }
         .card{
-            width: 400px;
-            height: 400px;
-            margin: 40px;
+            width: 380px;
+            height: 380px;
+            margin: 20px;
             background-color: #141921;
             color: white;
         }
         .image{
-            max-width: 380px;
+            max-width: 360px;
             max-height: 210px;
             object-fit: contain;
         }

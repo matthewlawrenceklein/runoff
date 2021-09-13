@@ -1,7 +1,7 @@
 <script>
     import { getStorage, ref, uploadBytes } from "firebase/storage";
     import { getFirestore, collection, addDoc } from "firebase/firestore"; 
-
+    import { writable } from 'svelte/store'
     export let accessType
     let  fileinput, selectedImage
     $: image = null 
@@ -24,16 +24,19 @@
 
         const storage = getStorage();
         const storageRef = ref(storage, image['name']);
-        uploadBytes(storageRef, image).then((snapshot) => {
-            accessType = 'standard'
-        });
-        const docRef = await addDoc(collection(db, "photos"), {
-            title: title,
-            description: description, 
-            postDate : postDate, 
-            imgName : image['name']
-            });
-        console.log("Document written with ID: ", docRef.id);
+        uploadBytes(storageRef, image)
+            .then(async(snapshot) => {
+                const docRef = await addDoc(collection(db, "photos"), {
+                    title: title,
+                    description: description, 
+                    postDate : postDate, 
+                    imgName : image['name']
+                });
+                console.log("Document written with ID: ", docRef.id);
+                accessType.set(null)
+                title = null 
+                description = null 
+                });
     } 
 </script>
     {#if selectedImage}

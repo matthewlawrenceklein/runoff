@@ -1,26 +1,27 @@
 <script>
+	import { writable } from 'svelte/store';
 	import Admin from './Admin.svelte'
 	import Photostream from './Photostream.svelte'
 
 	let regularAccess = false 
 	let superAccess = false
 	let userInput = '' 
-	$: accessType = null 
+	$: accessType = writable(null)
 
 	$: loginUser = () => {
 		if(userInput === 'admin'){
-			accessType = 'admin'
+			accessType.set('admin')
 		} else if (userInput === 'pass'){
-			accessType = 'standard'
+			accessType.set('standard')
 		}
 	}
 </script>
 
 <main>
 	<div class='main'>
-		{#if accessType === 'standard'}
+		{#if $accessType === 'standard'}
 			<Photostream/>
-		{:else if accessType === 'admin'}
+		{:else if $accessType === 'admin'}
 			<Admin {accessType} />
 			<Photostream/>
 		{:else}

@@ -7,6 +7,9 @@
     import { writable } from 'svelte/store';
     import { Circle3 } from 'svelte-loading-spinners'
 
+    export let byline
+    export let details
+
     const db = getFirestore();
     const imageURLs = writable([])
     const photoDocs = writable([])
@@ -15,12 +18,7 @@
 
     onMount(async() => {
         await getPhotoDocs()
-        await getBioInfo()
     })
-
-    async function getBioInfo(){
-        
-    }
 
     async function getPhotoDocs(){
         const q = query(collection(db, "photos"));
@@ -45,7 +43,7 @@
 
 </script>
     <div class='container'>
-        <Bio/>
+        <Bio {byline} {details}/>
         {#if $imageURLs.length > 0}
                 {#if loading}
                      <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3> 

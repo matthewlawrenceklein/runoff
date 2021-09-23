@@ -2,14 +2,30 @@
 	import { writable } from 'svelte/store';
 	import Admin from './Admin.svelte'
 	import Photostream from './Photostream.svelte'
+	import { onMount } from 'svelte'
+	import { doc, getDoc, getFirestore } from "firebase/firestore";
+	
+	const db = getFirestore();
+	let userInput = ''
+	let standardSecret
+	let adminSecret
+	let accessType = writable(null)
 
-	let userInput = '' 
-	$: accessType = writable(null)
+	onMount(async() => {
+		const adminRef = doc(db, "secrets", "admin");
+		const adminSnap = await getDoc(adminRef);
+		adminSecret = adminSnap.data().admin
+		
+		const standardRef = doc(db, 'secrets', 'standard')
+		const standardSnap = await getDoc(standardRef)
+		standardSecret = standardSnap.data().standard
+	})
+
 
 	$: loginUser = () => {
-		if(userInput.toLowerCase() === 'admin'){
+		if(userInput === adminSecret){
 			accessType.set('admin')
-		} else if (userInput.toLowerCase() === 'pass'){
+		} else if (userInput.toLowerCase() === standardSecret){
 			accessType.set('standard')
 		}
 	}

@@ -15,7 +15,12 @@
 
     onMount(async() => {
         await getPhotoDocs()
+        await getBioInfo()
     })
+
+    async function getBioInfo(){
+        
+    }
 
     async function getPhotoDocs(){
         const q = query(collection(db, "photos"));

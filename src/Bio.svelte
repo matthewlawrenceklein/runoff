@@ -1,14 +1,12 @@
 <script>
     // your script goes here
+    export let byline
+    export let details
 </script>
     <div class='container'>
-        <h3>byline goes here</h3>
+        <h3>{byline}</h3>
         <p> 
-            details go here and whatever else you want to type blah blah blah blah blah
-            details go here and whatever else you want to type blah blah blah blah blah
-            details go here and whatever else you want to type blah blah blah blah blah
-            details go here and whatever else you want to type blah blah blah blah blah
-            
+           {details}
         </p>
     </div>
 <style>
@@ -19,6 +17,8 @@
         color: white;
         margin-top: 50px;
         border-radius: 15px;
+        box-shadow: 5px 5px 15px -4px #000000;
+        -webkit-box-shadow: 5px 5px 15px -4px #000000; 
     }
     @media (max-width: 575.98px) { 
         .container{

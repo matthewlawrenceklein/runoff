@@ -113,6 +113,14 @@
         }
 
     }
+    @media (max-width: 375.98px){
+        .container{
+            justify-content: center;
+            width: 350px;
+            align-items: center;
+            background-color: #141921
+        }
+    }
 
     #photocontainer{
         width: 200px;

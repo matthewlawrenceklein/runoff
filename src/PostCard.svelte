@@ -2,27 +2,41 @@
     export let url
     export let photo
     import { onMount } from 'svelte'
-    $: photoConcat = null 
-    $: showDescriptionDetails = false
+    let photoConcat = null 
+    let date
+    let showDescriptionDetails = false
     
     onMount(() => {
-        if (photo.data()['description'].length > 100){
-            photoConcat = photo.data()['description'].slice(0,120) + '...'
-            showDescriptionDetails = true 
+        if (photo.data()['description'].length > 70){
+            photoConcat = photo.data()['description'].slice(0,120) + '...(click to exand)'
         }
+        date = new Date(1000 * photo.data()['postDate'])
+        date = date.toString().slice(0,10)
     })
+
+    const handleShowDetails = () => {
+        if(photoConcat){
+            showDescriptionDetails = !showDescriptionDetails
+        }
+    }
 </script>
-    <div class='card'>
-        <h1>{photo.data()['title']}</h1>
-        <p>{new Date(1000 * photo.data()['postDate']) }</p>
-        {#if photoConcat}
-            <p>{photoConcat}</p>
+    <div class='card' on:click={handleShowDetails}>
+        {#if showDescriptionDetails}
+            <h1>{photo.data()['title']}</h1>
+            <p><strong>{ date }</strong></p>
+            <p>{photo.data()['description']}</p>
         {:else}
-             <p>{photo.data()['description']}</p>
+             <h1>{photo.data()['title']}</h1>
+             <p><strong>{ date }</strong></p>
+             {#if photoConcat}
+                 <p>{photoConcat}</p>
+             {:else}
+                  <p>{photo.data()['description']}</p>
+             {/if}
+             <div class='image-container'>
+                 <img src={url} class='image' alt='photostream item'/>
+             </div>
         {/if}
-        <div class='image-container'>
-            <img src={url} class='image' alt='photostream item'/>
-        </div>
     </div>
 <style>
     .card{

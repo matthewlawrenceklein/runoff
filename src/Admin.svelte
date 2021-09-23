@@ -1,12 +1,16 @@
 <script>
     import { getStorage, ref, uploadBytes } from "firebase/storage";
-    import { getFirestore, collection, addDoc } from "firebase/firestore"; 
-    import { writable } from 'svelte/store'
+    import { getFirestore, collection, addDoc, doc, updateDoc } from "firebase/firestore"; 
+  
     export let accessType
-    let  fileinput, selectedImage
-    $: image = null 
-    $: title = null 
-    $: description = null 
+    export let byline
+    export let details
+    export let userInput
+
+    let  fileinput, selectedImage, updatedDetails, updatedByline
+    let image = null 
+    let title = null 
+    let description = null 
     const db = getFirestore();
 
     const onFileSelected = (e) => {
@@ -17,6 +21,24 @@
         reader.onload = e => {
             selectedImage = e.target.result
         };
+    }
+    const handleUpdateBio = async() => {
+        if(updatedByline){
+            const bylineRef = doc(db, 'bio', 'byline')
+            await updateDoc(bylineRef, {
+                byline : updatedByline
+            })
+            byline = updatedByline
+        }
+        if(updatedDetails){
+            const detailsRef = doc(db, 'bio', 'details')
+            await updateDoc(detailsRef, {
+                details : updatedDetails
+            })
+            details = updatedDetails
+        }
+        userInput = ''
+        accessType.set(null)
     }
 
     const handleSubmitPost = async() => {
@@ -57,6 +79,12 @@
             <textarea placeholder='description' rows='20' cols='12' bind:value={description} />
             <button class='button primary' on:click={handleSubmitPost}> Upload </button>
         </div>
+        <div class='row container'>
+            <h1>update your bio?</h1>
+            <input type='text' placeholder={byline} bind:value={updatedByline} />
+            <textarea placeholder={details} rows='20' cols='12' bind:value={updatedDetails}></textarea>
+            <button class='button primary' on:click={handleUpdateBio}> Update Bio </button>
+        </div>
     </div>
 <style>
     .main{
@@ -70,6 +98,10 @@
         width: 600px;
         align-items: center;
         background-color: #141921
+    }
+
+    h1{
+        color: white;
     }
     
     @media (max-width: 575.98px){

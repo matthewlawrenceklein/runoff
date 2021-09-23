@@ -8,7 +8,7 @@
     
     onMount(() => {
         if (photo.data()['description'].length > 70){
-            photoConcat = photo.data()['description'].slice(0,120) + '...(click to exand)'
+            photoConcat = photo.data()['description'].slice(0,70) + '...(click to exand)'
         }
         date = new Date(1000 * photo.data()['postDate'])
         date = date.toString().slice(0,10)

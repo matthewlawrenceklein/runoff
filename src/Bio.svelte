@@ -30,6 +30,16 @@
             border-radius: 15px;
         }
 	}
+    @media (max-width: 375.98px) { 
+        .container{
+            height: 200;
+            width: 340px;
+            background-color: #141921;
+            color: white;
+            margin-top: 50px;
+            border-radius: 15px;
+        }
+	}
 
     h3{
         text-align: center;

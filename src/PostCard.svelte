@@ -29,8 +29,11 @@
         width: 600px;
         height: 600px;
         margin: 40px;
+        border-radius: 15px;
         background-color: #141921;
         color: white;
+        box-shadow: 5px 5px 15px -4px #000000;
+        -webkit-box-shadow: 5px 5px 15px -4px #000000; 
     }
     .image-container{
         width: 100%;
@@ -66,6 +69,27 @@
         .image{
             max-width: 360px;
             max-height: 210px;
+            object-fit: contain;
+        }
+	}
+    @media (max-width: 375.98px) { 
+        h1{
+            font-size: medium;
+        }
+
+        p {
+            font-size: smaller;
+        }
+        .card{
+            width: 350px;
+            height: 350px;
+            margin: 20px;
+            background-color: #141921;
+            color: white;
+        }
+        .image{
+            max-width: 330px;
+            max-height: 180px;
             object-fit: contain;
         }
 	}

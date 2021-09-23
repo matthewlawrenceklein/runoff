@@ -6,12 +6,19 @@
 	import { doc, getDoc, getFirestore } from "firebase/firestore";
 	
 	const db = getFirestore();
+	let accessType = writable(null)
 	let userInput = ''
 	let standardSecret
 	let adminSecret
-	let accessType = writable(null)
+	let byline
+	let details
 
 	onMount(async() => {
+		getSecrets()
+		getBioInfo()
+	})
+	
+	async function getSecrets(){
 		const adminRef = doc(db, "secrets", "admin");
 		const adminSnap = await getDoc(adminRef);
 		adminSecret = adminSnap.data().admin
@@ -19,7 +26,17 @@
 		const standardRef = doc(db, 'secrets', 'standard')
 		const standardSnap = await getDoc(standardRef)
 		standardSecret = standardSnap.data().standard
-	})
+	}
+
+	async function getBioInfo(){
+        const bylineRef = doc(db, "bio", "byline");
+		const bylineSnap = await getDoc(bylineRef);
+		byline = bylineSnap.data().byline
+		
+		const detailsRef = doc(db, 'bio', 'details')
+		const detailsSnap = await getDoc(detailsRef)
+		details = detailsSnap.data().details
+    }
 
 
 	$: loginUser = () => {
@@ -34,10 +51,10 @@
 <main>
 	<div class='main'>
 		{#if $accessType === 'standard'}
-			<Photostream/>
+			<Photostream {byline} {details}/>
 		{:else if $accessType === 'admin'}
-			<Admin {accessType} />
-			<Photostream/>
+			<Admin {accessType} {byline} {details}/>
+			<Photostream {byline} {details}/>
 		{:else}
 			<div class='container'>
 				<input type='text' class='secret' placeholder='secret code' bind:value={userInput} on:input={loginUser}/>

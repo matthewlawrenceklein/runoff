@@ -1,8 +1,8 @@
 <script>
     import PostCard from './PostCard.svelte'
     import Bio from './Bio.svelte'
-    import { getStorage, ref, listAll, getDownloadURL  } from "firebase/storage";
-    import { collection, query, where, getDocs, getFirestore } from "firebase/firestore";
+    import { getStorage, ref, getDownloadURL  } from "firebase/storage";
+    import { collection, query, getDocs, getFirestore } from "firebase/firestore";
     import { onMount } from "svelte";
     import { writable } from 'svelte/store';
     import { Circle3 } from 'svelte-loading-spinners'
@@ -64,5 +64,4 @@
         border-radius: 10px;
         width: 100vw;
     }
-    /* your styles go here */
 </style>

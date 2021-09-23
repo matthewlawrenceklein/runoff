@@ -1,13 +1,10 @@
 <script>
-    // your script goes here
     export let byline
     export let details
 </script>
     <div class='container'>
         <h3>{byline}</h3>
-        <p> 
-           {details}
-        </p>
+        <p>{details}</p>
     </div>
 <style>
     .container{
@@ -40,11 +37,7 @@
             border-radius: 15px;
         }
 	}
-
     h3{
         text-align: center;
     }
-    /* your styles go here */
 </style>
-
-<!-- markup (zero or more items) goes here -->

@@ -7,17 +7,12 @@
     let showDescriptionDetails = false
     
     onMount(() => {
-        if (photo.data()['description'].length > 70){
-            photoConcat = photo.data()['description'].slice(0,70) + '...(click to exand)'
-        }
-        date = new Date(1000 * photo.data()['postDate'])
-        date = date.toString().slice(0,10)
+        if (photo.data()['description'].length > 70) photoConcat = photo.data()['description'].slice(0,70) + '...(click to exand)' 
+        date = new Date(1000 * photo.data()['postDate']).toString().slice(0,10)
     })
 
     const handleShowDetails = () => {
-        if(photoConcat){
-            showDescriptionDetails = !showDescriptionDetails
-        }
+        if(photoConcat) showDescriptionDetails = !showDescriptionDetails
     }
 </script>
     <div class='card' on:click={handleShowDetails}>
@@ -60,11 +55,9 @@
         max-height: 360px;
         object-fit: contain;
     }
-
     h1{
         text-align: center;
     }
-
     @media (max-width: 575.98px) { 
         h1{
             font-size: medium;
@@ -90,7 +83,6 @@
         h1{
             font-size: medium;
         }
-
         p {
             font-size: smaller;
         }
@@ -107,7 +99,4 @@
             object-fit: contain;
         }
 	}
-    /* your styles go here */
 </style>
-
-<!-- markup (zero or more items) goes here -->

@@ -16,7 +16,6 @@
     const onFileSelected = (e) => {
         image = e.target.files[0];
         let reader = new FileReader();
-        
         reader.readAsDataURL(image);
         reader.onload = e => {
             selectedImage = e.target.result
@@ -25,16 +24,12 @@
     const handleUpdateBio = async() => {
         if(updatedByline){
             const bylineRef = doc(db, 'bio', 'byline')
-            await updateDoc(bylineRef, {
-                byline : updatedByline
-            })
+            await updateDoc(bylineRef, { byline : updatedByline })
             byline = updatedByline
         }
         if(updatedDetails){
             const detailsRef = doc(db, 'bio', 'details')
-            await updateDoc(detailsRef, {
-                details : updatedDetails
-            })
+            await updateDoc(detailsRef, { details : updatedDetails })
             details = updatedDetails
         }
         userInput = ''
@@ -48,17 +43,16 @@
         const storageRef = ref(storage, image['name']);
         uploadBytes(storageRef, image)
             .then(async(snapshot) => {
-                const docRef = await addDoc(collection(db, "photos"), {
+                await addDoc(collection(db, "photos"), {
                     title: title,
                     description: description, 
                     postDate : postDate, 
                     imgName : image['name']
                 });
-                console.log("Document written with ID: ", docRef.id);
                 accessType.set(null)
                 title = null 
                 description = null 
-                });
+            });
     } 
 </script>
     {#if selectedImage}
@@ -103,7 +97,6 @@
     h1{
         color: white;
     }
-    
     @media (max-width: 575.98px){
         .container{
             justify-content: center;
@@ -127,7 +120,4 @@
         height: 200px;
         margin-bottom: 125px;
     }
-    /* your styles go here */
 </style>
-
-<!-- markup (zero or more items) goes here -->

@@ -53,7 +53,7 @@
 		{#if $accessType === 'standard'}
 			<Photostream {byline} {details}/>
 		{:else if $accessType === 'admin'}
-			<Admin {accessType} {byline} {details}/>
+			<Admin {accessType} {byline} {details} {userInput}/>
 			<Photostream {byline} {details}/>
 		{:else}
 			<div class='container'>

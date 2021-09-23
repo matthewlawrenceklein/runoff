@@ -8,10 +8,7 @@
 	const db = getFirestore();
 	let accessType = writable(null)
 	let userInput = ''
-	let standardSecret
-	let adminSecret
-	let byline
-	let details
+	let standardSecret, adminSecret, byline, details
 
 	onMount(async() => {
 		getSecrets()
@@ -19,25 +16,18 @@
 	})
 	
 	async function getSecrets(){
-		const adminRef = doc(db, "secrets", "admin");
-		const adminSnap = await getDoc(adminRef);
+		const adminSnap = await getDoc(doc(db, "secrets", "admin"));
+		const standardSnap = await getDoc(doc(db, 'secrets', 'standard'))
 		adminSecret = adminSnap.data().admin
-		
-		const standardRef = doc(db, 'secrets', 'standard')
-		const standardSnap = await getDoc(standardRef)
 		standardSecret = standardSnap.data().standard
 	}
 
 	async function getBioInfo(){
-        const bylineRef = doc(db, "bio", "byline");
-		const bylineSnap = await getDoc(bylineRef);
+		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
+		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
 		byline = bylineSnap.data().byline
-		
-		const detailsRef = doc(db, 'bio', 'details')
-		const detailsSnap = await getDoc(detailsRef)
 		details = detailsSnap.data().details
     }
-
 
 	$: loginUser = () => {
 		if(userInput === adminSecret){

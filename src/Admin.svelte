@@ -32,10 +32,8 @@
             await updateDoc(detailsRef, { details : updatedDetails })
             details = updatedDetails
         }
-        userInput = ''
         accessType.set(null)
     }
-
     const handleSubmitPost = async() => {
         let postDate = new Date
 
@@ -114,7 +112,6 @@
             background-color: #141921
         }
     }
-
     #photocontainer{
         width: 200px;
         height: 200px;

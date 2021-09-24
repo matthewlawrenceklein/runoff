@@ -17,9 +17,9 @@
 </script>
     <div class='card' on:click={handleShowDetails}>
         {#if showDescriptionDetails}
-            <h1>{photo.data()['title']}</h1>
-            <p><strong>{ date }</strong></p>
-            <p>{photo.data()['description']}</p>
+             <h1>{photo.data()['title']}</h1>
+             <p><strong>{ date }</strong></p>
+             <p>{photo.data()['description']}</p>
         {:else}
              <h1>{photo.data()['title']}</h1>
              <p><strong>{ date }</strong></p>

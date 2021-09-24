@@ -32,8 +32,10 @@
 	$: loginUser = () => {
 		if(userInput === adminSecret){
 			accessType.set('admin')
+			userInput = ''
 		} else if (userInput.toLowerCase() === standardSecret){
 			accessType.set('standard')
+			userInput = ''
 		}
 	}
 </script>

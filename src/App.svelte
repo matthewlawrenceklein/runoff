@@ -10,7 +10,7 @@
 	let userInput = ''
 	let standardSecret, adminSecret, byline, details
 
-	onMount(async() => {
+	onMount(() => {
 		getSecrets()
 		getBioInfo()
 	})

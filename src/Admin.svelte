@@ -5,7 +5,6 @@
     export let accessType
     export let byline
     export let details
-    export let userInput
 
     let  fileinput, selectedImage, updatedDetails, updatedByline
     let image = null

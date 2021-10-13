@@ -2,12 +2,12 @@
     export let url
     export let photo
     import { onMount } from 'svelte'
-    let photoConcat = null 
+    let photoConcat = null
     let date
     let showDescriptionDetails = false
-    
+
     onMount(() => {
-        if (photo.data()['description'].length > 70) photoConcat = photo.data()['description'].slice(0,70) + '...(click to expand)' 
+        if (photo.data()['description'].length > 70) photoConcat = photo.data()['description'].slice(0,70) + '...(click to expand)'
         date = new Date(1000 * photo.data()['postDate']).toString().slice(0,10)
     })
 
@@ -42,7 +42,7 @@
         background-color: #141921;
         color: white;
         box-shadow: 5px 5px 15px -4px #000000;
-        -webkit-box-shadow: 5px 5px 15px -4px #000000; 
+        -webkit-box-shadow: 5px 5px 15px -4px #000000;
     }
     .image-container{
         width: 100%;
@@ -58,7 +58,7 @@
     h1{
         text-align: center;
     }
-    @media (max-width: 575.98px) { 
+    @media (max-width: 575.98px) {
         h1{
             font-size: medium;
         }
@@ -79,7 +79,7 @@
             object-fit: contain;
         }
 	}
-    @media (max-width: 375.98px) { 
+    @media (max-width: 375.98px) {
         h1{
             font-size: medium;
         }

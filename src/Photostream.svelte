@@ -14,7 +14,7 @@
     const imageURLs = writable([])
     const photoDocs = writable([])
     const storage = getStorage();
-    $: loading = true 
+    $: loading = true
 
     onMount(async() => {
         await getPhotoDocs()
@@ -46,13 +46,13 @@
         <Bio {byline} {details}/>
         {#if $imageURLs.length > 0}
                 {#if loading}
-                     <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3> 
+                     <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>
                 {/if}
                 {#each [...$photoDocs] as photo}
                      <PostCard {photo} url={$imageURLs.find(url => url.includes(photo.data()['imgName']))}}/>
                 {/each}
         {:else}
-            <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3> 
+            <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>
         {/if}
     </div>
 <style>

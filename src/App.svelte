@@ -4,7 +4,7 @@
 	import Photostream from './Photostream.svelte'
 	import { onMount } from 'svelte'
 	import { doc, getDoc, getFirestore } from "firebase/firestore";
-	
+
 	const db = getFirestore();
 	let accessType = writable(null)
 	let userInput = ''
@@ -14,7 +14,7 @@
 		getSecrets()
 		getBioInfo()
 	})
-	
+
 	async function getSecrets(){
 		const adminSnap = await getDoc(doc(db, "secrets", "admin"));
 		const standardSnap = await getDoc(doc(db, 'secrets', 'standard'))
@@ -74,7 +74,7 @@
 		height: 90px;
 		width: 70vw;
 	}
-	@media (max-width: 575.98px) { 
+	@media (max-width: 575.98px) {
 		.secret{
 			height: 90px;
 			width: 95vw;

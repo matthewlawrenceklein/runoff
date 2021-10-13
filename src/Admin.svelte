@@ -1,16 +1,16 @@
 <script>
     import { getStorage, ref, uploadBytes } from "firebase/storage";
-    import { getFirestore, collection, addDoc, doc, updateDoc } from "firebase/firestore"; 
-  
+    import { getFirestore, collection, addDoc, doc, updateDoc } from "firebase/firestore";
+
     export let accessType
     export let byline
     export let details
     export let userInput
 
     let  fileinput, selectedImage, updatedDetails, updatedByline
-    let image = null 
-    let title = null 
-    let description = null 
+    let image = null
+    let title = null
+    let description = null
     const db = getFirestore();
 
     const onFileSelected = (e) => {
@@ -43,15 +43,15 @@
             .then(async(snapshot) => {
                 await addDoc(collection(db, "photos"), {
                     title: title,
-                    description: description, 
-                    postDate : postDate, 
+                    description: description,
+                    postDate : postDate,
                     imgName : image['name']
                 });
                 accessType.set(null)
-                title = null 
-                description = null 
+                title = null
+                description = null
             });
-    } 
+    }
 </script>
     {#if selectedImage}
         <div class='main'>
@@ -61,7 +61,7 @@
         </div>
     {:else}
         <div class='main'>
-            <img class="avatar" src='images/image.png' alt="placeholder" /> 
+            <img class="avatar" src='images/image.png' alt="placeholder" />
         </div>
     {/if}
     <div class='main'>

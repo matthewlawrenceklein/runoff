@@ -15,9 +15,9 @@
         margin-top: 50px;
         border-radius: 15px;
         box-shadow: 5px 5px 15px -4px #000000;
-        -webkit-box-shadow: 5px 5px 15px -4px #000000; 
+        -webkit-box-shadow: 5px 5px 15px -4px #000000;
     }
-    @media (max-width: 575.98px) { 
+    @media (max-width: 575.98px) {
         .container{
             height: 220;
             width: 380px;
@@ -27,7 +27,7 @@
             border-radius: 15px;
         }
 	}
-    @media (max-width: 375.98px) { 
+    @media (max-width: 375.98px) {
         .container{
             height: 200;
             width: 340px;

@@ -9,6 +9,7 @@
 
     export let byline
     export let details
+    export let accessType
 
     const db = getFirestore();
     const imageURLs = writable([])
@@ -24,11 +25,13 @@
         const q = query(collection(db, "photos"));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-            photoDocs.set([...$photoDocs, doc])
+            let id = doc.id // svelte yells at you about dot notation in the spread operator below :/
+            let docWithID = {...doc.data(), id}
+            photoDocs.set([...$photoDocs, docWithID])
         });
-        photoDocs.set($photoDocs.sort((a,b) => (a.data()['postDate'] < b.data()['postDate']) ? 1 : ((b.data()['postDate'] < a.data()['postDate']) ? -1 : 0)))
+        photoDocs.set($photoDocs.sort((a,b) => (a['postDate'] < b['postDate']) ? 1 : ((b['postDate'] < a['postDate']) ? -1 : 0)))
         $photoDocs.map(doc => {
-            getURL(doc.data()['imgName'])
+            getURL(doc['imgName'])
         })
     }
 
@@ -49,7 +52,7 @@
                      <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>
                 {/if}
                 {#each [...$photoDocs] as photo}
-                     <PostCard {photo} url={$imageURLs.find(url => url.includes(photo.data()['imgName']))}}/>
+                     <PostCard {photo} {accessType} url={$imageURLs.find(url => url.includes(photo['imgName']))}}/>
                 {/each}
         {:else}
             <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>

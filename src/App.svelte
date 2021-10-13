@@ -43,10 +43,10 @@
 <main>
 	<div class='main'>
 		{#if $accessType === 'standard'}
-			<Photostream {byline} {details}/>
+			<Photostream {byline} {details} {accessType}/>
 		{:else if $accessType === 'admin'}
 			<Admin {accessType} {byline} {details} {userInput}/>
-			<Photostream {byline} {details}/>
+			<Photostream {byline} {details} {accessType}/>
 		{:else}
 			<div class='container'>
 				<input type='text' class='secret' placeholder='secret code' bind:value={userInput} on:input={loginUser}/>

@@ -4,6 +4,7 @@
 	import Photostream from './Photostream.svelte'
 	import { onMount } from 'svelte'
 	import { doc, getDoc, getFirestore } from "firebase/firestore";
+	import * as config from '../runoff-config.json'
 
 	const db = getFirestore();
 	let accessType = writable(null)

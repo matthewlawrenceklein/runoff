@@ -1,18 +1,21 @@
 <script>
+    import { onMount } from "svelte";
     import { getStorage, ref, uploadBytes } from "firebase/storage";
-    import { getFirestore, collection, addDoc, doc, updateDoc } from "firebase/firestore";
+    import { getFirestore, collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
     export let accessType
-    export let byline
-    export let details
 
-    let  fileinput, selectedImage, updatedDetails, updatedByline
+    let  fileinput, selectedImage, updatedDetails, updatedByline, byline, details;
     let image = null
     let title = null
     let description = null
     const db = getFirestore();
 
-    const onFileSelected = (e) => {
+    onMount(async() => {
+        getBioInfo()
+    })
+
+    const handleFileSelected = (e) => {
         image = e.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(image);
@@ -51,6 +54,13 @@
                 description = null
             });
     }
+
+    const getBioInfo = async() => {
+		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
+		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
+		byline = bylineSnap.data().byline
+		details = detailsSnap.data().details
+	}
 </script>
     {#if selectedImage}
         <div class='main'>
@@ -65,7 +75,7 @@
     {/if}
     <div class='main'>
         <div class='row container'>
-            <input type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
+            <input type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>handleFileSelected(e)} bind:this={fileinput} >
             <input type='text' placeholder='title' bind:value={title} />
             <textarea placeholder='description' rows='20' cols='12' bind:value={description} />
             <button class='button primary' on:click={handleSubmitPost}> Upload </button>

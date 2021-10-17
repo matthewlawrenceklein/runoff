@@ -7,17 +7,18 @@
     import { writable } from 'svelte/store';
     import { Circle3 } from 'svelte-loading-spinners'
 
-    export let byline
-    export let details
     export let accessType
 
     const db = getFirestore();
     const imageURLs = writable([])
     const photoDocs = writable([])
     const storage = getStorage();
+    let byline;
+    let details;
     $: loading = true
 
     onMount(async() => {
+        await getBioInfo()
         await getPhotoDocs()
     })
 
@@ -33,6 +34,13 @@
         $photoDocs.map(doc => {
             getURL(doc['imgName'])
         })
+    }
+
+    async function getBioInfo(){
+		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
+		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
+		byline = bylineSnap.data().byline
+		details = detailsSnap.data().details
     }
 
     async function getURL(imageName){

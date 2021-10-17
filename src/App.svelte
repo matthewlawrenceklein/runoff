@@ -12,7 +12,6 @@
 
 	onMount(() => {
 		getSecrets()
-		getBioInfo()
 	})
 
 	async function getSecrets(){
@@ -21,13 +20,6 @@
 		adminSecret = adminSnap.data().admin
 		standardSecret = standardSnap.data().standard
 	}
-
-	async function getBioInfo(){
-		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
-		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
-		byline = bylineSnap.data().byline
-		details = detailsSnap.data().details
-    }
 
 	$: loginUser = () => {
 		if(userInput === adminSecret){
@@ -43,10 +35,10 @@
 <main>
 	<div class='main'>
 		{#if $accessType === 'standard'}
-			<Photostream {byline} {details} {accessType}/>
+			<Photostream {accessType}/>
 		{:else if $accessType === 'admin'}
-			<Admin {accessType} {byline} {details} {userInput}/>
-			<Photostream {byline} {details} {accessType}/>
+			<Admin {accessType} />
+			<Photostream {accessType}/>
 		{:else}
 			<div class='container'>
 				<input type='text' class='secret' placeholder='secret code' bind:value={userInput} on:input={loginUser}/>

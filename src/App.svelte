@@ -8,7 +8,7 @@
 	const db = getFirestore();
 	let accessType = writable(null)
 	let userInput = ''
-	let standardSecret, adminSecret, byline, details
+	let standardSecret, adminSecret
 
 	onMount(() => {
 		getSecrets()

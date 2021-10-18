@@ -13,7 +13,7 @@ runoff is built with [Svelte](https://github.com/sveltejs/svelte), [chotaCSS](ht
 At present, runoff requires a google developer account. See the development roadmap below for proposed changes to the requirement.
 
 ## get started
-Getting started with runoff consists of three steps
+Getting started with runoff should take ~ 15 minutes, and consists of three steps:
 - configuring your firebase backend
 - configuring your svelte frontend
 - deploying your site
@@ -43,4 +43,18 @@ Getting started with runoff consists of three steps
     - note: firebase credentials are not secret and [do not need to be obsfucated](https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public#:~:text=It%20is%20not%20a%20security,interact%20with%20your%20Firebase%20project.)
 - you can additionally alter the site title from the `index.html` file in the `public` folder.
 - see development roadmap below for proposed changes to styling
+- you can test the functionality of your site by running `npm run dev` from the project directory and navigating to `http://localhost:5000/` in any browser.
 
+### deploying your site
+- for users looking to host static files
+    - run `npm run build` from the project directory.
+    - the contents of your `public` folder are now ready to be deployed.
+- for users looking to host using [firebase hosting](https://firebase.google.com/docs/hosting)
+    - in your project directory, open the `.firebaserc` file and change the `default project` value to match your project
+    - navigate to your firebase project dashboard and select __hosting__
+    - select __get started__
+    - follow the prompts to use firebase's CLI tool to configure your hosting settings.
+        - confirm the default build folder as `public`
+        - choose __No__ when asked to overwrite the existing `index.html`
+    - follow the additional steps to optionally configure [github actions](https://github.com/features/actions)
+    - run `firebase deploy` to deploy your hosted photostream

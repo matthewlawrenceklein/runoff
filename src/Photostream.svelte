@@ -36,22 +36,22 @@
         })
     }
 
-    async function getBioInfo(){
-		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
-		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
-		byline = bylineSnap.data().byline
-		details = detailsSnap.data().details
-    }
 
     async function getURL(imageName){
         const imageReference = ref(storage, `/${imageName}`);
         await getDownloadURL(ref(storage, imageReference))
-            .then((url) => {
-                imageURLs.set([...$imageURLs, url])
-            })
+        .then((url) => {
+            imageURLs.set([...$imageURLs, url])
+        })
         loading = false
     }
 
+    async function getBioInfo(){
+        const bylineSnap = await getDoc(doc(db, "bio", "byline"));
+        const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
+        byline = bylineSnap.data().byline
+        details = detailsSnap.data().details
+    }
 </script>
     <div class='container'>
         <Bio {byline} {details}/>

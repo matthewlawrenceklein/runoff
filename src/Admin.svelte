@@ -40,14 +40,14 @@
         let postDate = new Date
 
         const storage = getStorage();
-        const storageRef = ref(storage, image['name']);
+        const storageRef = ref(storage, image['name'].replaceAll(' ', '');
         uploadBytes(storageRef, image)
             .then(async(snapshot) => {
                 await addDoc(collection(db, "photos"), {
                     title: title,
                     description: description,
                     postDate : postDate,
-                    imgName : image['name']
+                    imgName : image['name'].replaceAll(' ', '')
                 });
                 accessType.set(null)
                 title = null

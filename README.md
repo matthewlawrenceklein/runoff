@@ -68,3 +68,6 @@ current future plans, in tentative order of priority, include:
 
 ## contributing (yes plz)
 - please see contributing guidelines [here](https://github.com/matthewlawrenceklein/runoff/blob/main/CONTRIBUTING.md)
+
+## license
+code released under the [GNU general public license v3](https://github.com/matthewlawrenceklein/runoff/blob/main/LICENSE)

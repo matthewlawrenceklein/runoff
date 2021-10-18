@@ -67,4 +67,4 @@ current future plans, in tentative order of priority, include:
 - refactor codebase with the aim of reducing bundle size.
 
 ## contributing (yes plz)
-- please see contributing guidelines [here](https://github.com/matthewlawrenceklein/runoff#contributing)
+- please see contributing guidelines [here](https://github.com/matthewlawrenceklein/runoff/blob/main/CONTRIBUTING.md)

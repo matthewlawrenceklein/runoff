@@ -1,6 +1,6 @@
 # runoff
-A photostream apart from the social media flood
-
+A photostream apart from the social media flood  
+![runoff](https://media2.giphy.com/media/GgVR3S0nuVyTHnmWZw/giphy.gif?cid=790b761186e6a39c6c8d59afadac501ded083eca94129d64&rid=giphy.gif&ct=g)
 ## what
 runoff is a basic template for generating personal photostream sites. Kind of like instagram, without all the stuff.  
 You can view a live demo (and my own personal photostream) [here](http://photostream.matthewlawrencekle.in/). The passcode is _runoff_  

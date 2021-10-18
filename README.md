@@ -5,11 +5,12 @@ A photostream apart from the social media flood
 runoff is a basic template for generating personal photostream sites. Kind of like instagram, without all the stuff.
 runoff is built with [Svelte](https://github.com/sveltejs/svelte), [chotaCSS](https://github.com/jenil/chota), and Google [cloud firestore](https://firebase.google.com/docs/firestore) + [storage](https://firebase.google.com/docs/storage). runoff is
 - lightweight
+- unobtrusive (runoff stores zero cookies, registers zero users, and tracks zero usage)
 - private by default
 - unopinioned (ok, maybe just a little)
 - mobile friendly
 
-At present, runoff requires a google developer account. See the development roadmap below for planned changes to the requirement.
+At present, runoff requires a google developer account. See the development roadmap below for proposed changes to the requirement.
 
 ## get started
 Getting started with runoff consists of three steps
@@ -24,13 +25,22 @@ Getting started with runoff consists of three steps
 - from the project dashboard, navigate to __firestore database__ and select __create database__
     - set your security rules and server location
     - once provisioned, you will start three `collections`
-        - a `bio` collection
         - a `photos` collection
-        - a `secrets` collection with two documents that must be set from the firebase developer console:
+        - a `bio` collection with two documents that must _initially_ be set from the firebase developer console:
+            - a `byline` kvp with string value
+            - a `details` kvp with string value
+        - a `secrets` collection with two documents that must _always_ be set from the firebase developer console:
             - an `admin` kvp with the value set to whatever passcode you'd like to use for __admin__ access
         - a `standard` kvp with the value set to whatever passcode you'd like to share for __standard__ access
-- you do not need to configure any __storage__ settings
+- from the project dashboard, navigate to __storage__ and select __rules__
+    - from the __edit rules__ tab, change ln 5 of the rules object to be `allow read, write`. your storage is now configured.
 
 ### configuring your svelte frontend
 - fork/clone this repository to your local machine.
+- open the cloned directory in the IDE/text editor of your choice
+- once in the directory, run `npm i` to install dependencies
+- in the `src` folder, open `main.js` and add your `firebaseConfig` data where specified
+    - note: firebase credentials are not secret and [do not need to be obsfucated](https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public#:~:text=It%20is%20not%20a%20security,interact%20with%20your%20Firebase%20project.)
+- you can additionally alter the site title from the `index.html` file in the `public` folder.
+- see development roadmap below for proposed changes to styling
 

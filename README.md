@@ -2,9 +2,9 @@
 A photostream apart from the social media flood
 
 ## what
-runoff is a basic template for generating personal photostream sites. Kind of like instagram, without all the stuff.
-runoff is built with [Svelte](https://github.com/sveltejs/svelte), [chotaCSS](https://github.com/jenil/chota), and Google [cloud firestore](https://firebase.google.com/docs/firestore) + [storage](https://firebase.google.com/docs/storage). runoff is
-- lightweight
+runoff is a basic template for generating personal photostream sites. Kind of like instagram, without all the stuff.  
+You can view a live demo (and my own personal photostream) [here](http://photostream.matthewlawrencekle.in/). The passcode is _runoff_  
+runoff is built with [Svelte](https://github.com/sveltejs/svelte), [chotaCSS](https://github.com/jenil/chota), and Google [cloud firestore](https://firebase.google.com/docs/firestore) + [storage](https://firebase.google.com/docs/storage). runoff is:
 - unobtrusive (runoff stores zero cookies, registers zero users, and tracks zero usage)
 - private by default
 - unopinioned (ok, maybe just a little)
@@ -12,7 +12,7 @@ runoff is built with [Svelte](https://github.com/sveltejs/svelte), [chotaCSS](ht
 
 At present, runoff requires a google developer account. See the development roadmap below for proposed changes to the requirement.
 
-## get started
+## getting started
 Getting started with runoff should take ~ 15 minutes, and consists of three steps:
 - configuring your firebase backend
 - configuring your svelte frontend
@@ -58,3 +58,13 @@ Getting started with runoff should take ~ 15 minutes, and consists of three step
         - choose __No__ when asked to overwrite the existing `index.html`
     - follow the additional steps to optionally configure [github actions](https://github.com/features/actions)
     - run `firebase deploy` to deploy your hosted photostream
+
+## development roadmap
+current future plans, in tentative order of priority, include:
+- migrating the backend to [supabase](https://supabase.io/), the open-source firebase alternative
+- creating a global styling object to easily set style elements like font or color-theme
+- more in-depth documentation of github actions configuration
+- refactor codebase with the aim of reducing bundle size.
+
+## contributing (yes plz)
+- please see contributing guidelines [here](https://github.com/matthewlawrenceklein/runoff#contributing)

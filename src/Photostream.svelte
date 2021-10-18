@@ -2,7 +2,7 @@
     import PostCard from './PostCard.svelte'
     import Bio from './Bio.svelte'
     import { getStorage, ref, getDownloadURL  } from "firebase/storage";
-    import { collection, query, getDocs, getFirestore } from "firebase/firestore";
+    import { collection, query, getDocs, getFirestore, getDoc, doc } from "firebase/firestore";
     import { onMount } from "svelte";
     import { writable } from 'svelte/store';
     import { Circle3 } from 'svelte-loading-spinners'

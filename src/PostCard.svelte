@@ -3,8 +3,9 @@
     export let photo
     export let accessType
     import { onMount } from 'svelte'
-    import { getFirestore, query, getDocs, collection, where, deleteDoc, doc } from "firebase/firestore";
+    import { getFirestore, deleteDoc, doc } from "firebase/firestore";
     import { getStorage, ref, deleteObject } from "firebase/storage";
+    import { Lightbox } from 'svelte-lightbox'
 
     let photoConcat = null
     let date

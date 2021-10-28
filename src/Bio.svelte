@@ -1,12 +1,23 @@
 <script>
     export let byline
     export let details
+    export let linkTitle
+    export let linkURL
+
 </script>
     <div class='container'>
         <h3>{byline}</h3>
         <p>{details}</p>
+        {#if linkTitle}
+            <a href={linkURL} target="_blank" rel="noreferrer" id='bio-link'>{linkTitle}</a>
+        {/if}
+
     </div>
 <style>
+    #bio-link{
+        text-align: center;
+        color: #727a87 ;
+    }
     .container{
         height: 220;
         width: 600px;

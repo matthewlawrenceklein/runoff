@@ -13,8 +13,7 @@
     const imageURLs = writable([])
     const photoDocs = writable([])
     const storage = getStorage();
-    let byline;
-    let details;
+    let byline, details, linkTitle, linkURL;
     $: loading = true
 
     onMount(async() => {
@@ -36,25 +35,33 @@
         })
     }
 
+    async function getBioInfo(){
+		const linkSnap = await getDoc(doc(db, 'bio', 'link'))
+		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
+		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
+		byline = bylineSnap.data().byline
+		details = detailsSnap.data().details
+		linkTitle = linkSnap.data()['link']['linkTitle']
+		linkURL = linkSnap.data()['link']['linkURL']
+    }
 
     async function getURL(imageName){
         const imageReference = ref(storage, `/${imageName}`);
         await getDownloadURL(ref(storage, imageReference))
-        .then((url) => {
-            imageURLs.set([...$imageURLs, url])
-        })
+            .then((url) => {
+                imageURLs.set([...$imageURLs, url])
+            })
         loading = false
     }
 
-    async function getBioInfo(){
-        const bylineSnap = await getDoc(doc(db, "bio", "byline"));
-        const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
-        byline = bylineSnap.data().byline
-        details = detailsSnap.data().details
-    }
 </script>
     <div class='container'>
-        <Bio {byline} {details}/>
+        {#if loading}
+            <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>
+        {:else}
+            <Bio {byline} {details} {linkTitle} {linkURL}/>
+        {/if}
+
         {#if $imageURLs.length > 0}
                 {#if loading}
                      <Circle3 size="60" color="#FF3E00" unit="px" duration='1s'></Circle3>

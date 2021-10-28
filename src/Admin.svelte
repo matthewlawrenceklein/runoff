@@ -5,7 +5,8 @@
 
     export let accessType
 
-    let  fileinput, selectedImage, updatedDetails, updatedByline, byline, details;
+    let  fileinput, selectedImage, updatedDetails, updatedByline, byline,
+    details, linkURL, updatedLinkURL, linkTitle, updatedLinkTitle;
     let image = null
     let title = null
     let description = null
@@ -34,13 +35,22 @@
             await updateDoc(detailsRef, { details : updatedDetails })
             details = updatedDetails
         }
+        if(updatedLinkURL || updatedLinkTitle){
+            const linkRef = doc(db, 'bio', 'link')
+            await updateDoc(linkRef, { link : {
+                linkURL : updatedLinkURL ? updatedLinkURL : linkURL,
+                linkTitle: updatedLinkTitle ? updatedLinkTitle : linkTitle
+            } })
+            linkURL = updatedLinkURL
+            linkTitle = updatedLinkTitle
+        }
         accessType.set(null)
     }
     const handleSubmitPost = async() => {
         let postDate = new Date
 
         const storage = getStorage();
-        const storageRef = ref(storage, image['name'].replaceAll(' ', '');
+        const storageRef = ref(storage, image['name'].replaceAll(' ', ''));
         uploadBytes(storageRef, image)
             .then(async(snapshot) => {
                 await addDoc(collection(db, "photos"), {
@@ -58,8 +68,18 @@
     const getBioInfo = async() => {
 		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
 		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))
-		byline = bylineSnap.data().byline
-		details = detailsSnap.data().details
+        const linkSnap = await getDoc(doc(db, "bio", "link"))
+
+        if(bylineSnap.exists()){
+            byline = bylineSnap.data().byline
+        }
+        if(detailsSnap.exists()){
+            details = detailsSnap.data().details
+        }
+        if(linkSnap.exists()){
+            linkURL = linkSnap.data()['link']['linkURL']
+            linkTitle = linkSnap.data()['link']['linkTitle']
+        }
 	}
 </script>
     {#if selectedImage}
@@ -83,6 +103,8 @@
         <div class='row container'>
             <h1>update your bio?</h1>
             <input type='text' placeholder={byline} bind:value={updatedByline} />
+            <input type='text' placeholder={linkURL} bind:value={updatedLinkURL} />
+            <input type='text' placeholder={linkTitle} bind:value={updatedLinkTitle} />
             <textarea placeholder={details} rows='20' cols='12' bind:value={updatedDetails}></textarea>
             <button class='button primary' on:click={handleUpdateBio}> Update Bio </button>
         </div>

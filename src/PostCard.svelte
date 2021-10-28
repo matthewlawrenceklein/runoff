@@ -52,7 +52,10 @@
                   <p>{photo['description']}</p>
              {/if}
              <div class='image-container'>
-                 <img src={url} class='image' alt='photostream item'/>
+                <Lightbox description={photo['title']} transitionDuration={200} thumbnail>
+                    <img src={url} slot='thumbnail' class='image' alt='photostream item'/>
+                    <img src={url} slot='image' alt='photostream item'/>
+                </Lightbox>
                  {#if $accessType == 'admin'}
                     <button id='delete-post' class='button error' on:click={handleDeletePost}>delete post</button>
                  {/if}

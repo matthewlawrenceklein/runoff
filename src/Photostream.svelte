@@ -2,7 +2,7 @@
     import PostCard from './PostCard.svelte'
     import Bio from './Bio.svelte'
     import { getStorage, ref, getDownloadURL  } from "firebase/storage";
-    import { collection, query, getDocs, getFirestore, getDoc, doc } from "firebase/firestore";
+    import { collection, query, getDocs, getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
     import { onMount } from "svelte";
     import { writable } from 'svelte/store';
     import { Circle3 } from 'svelte-loading-spinners'
@@ -36,6 +36,22 @@
     }
 
     async function getBioInfo(){
+        const bioSnapshot = await getDocs(query(collection(db, 'bio')))
+        if(bioSnapshot.size < 3){ // if first load, create db bio documents
+            const addByline = await setDoc(doc(db, 'bio', 'byline'), {
+                byline : 'set your byline'
+            })
+            const addDetails = await setDoc(doc(db, 'bio', 'details'), {
+                details : 'set your details'
+            })
+            const addLink = await setDoc(doc(db, 'bio', 'link'), {
+                link : {
+                    linkURL : 'set your link URL',
+                    linkTitle : 'set your link title'
+                }
+            })
+        }
+        // once we're guaranteed the existence of bio docs, fetch them
 		const linkSnap = await getDoc(doc(db, 'bio', 'link'))
 		const bylineSnap = await getDoc(doc(db, "bio", "byline"));
 		const detailsSnap = await getDoc(doc(db, 'bio', 'details'))

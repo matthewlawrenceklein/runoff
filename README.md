@@ -25,14 +25,9 @@ Getting started with runoff should take ~ 15 minutes, and consists of three step
 - navigate to your [firebase console](https://console.firebase.google.com/) and select __add project__. Name your project and proceed.
 - from the project dashboard, navigate to __firestore database__ and select __create database__
     - set your security rules and server location
-    - once provisioned, you will start three `collections`
+    - once provisioned, you will start three `collections`. When asked to set an initial document in each collection, you can create and then delete it. runoff will generate your collection doc structure for you :)
         - a `photos` collection
-        - a `bio` collection with two documents that must _initially_ be set from the firebase developer console:
-            - a `byline` kvp with string value
-            - a `details` kvp with string value
-            - a `link` object with:
-                - a `linkURL` kvp with string value
-                - a `linkTitle` kvp with string value   
+        - a `bio` collection
         - a `secrets` collection with two documents that must _always_ be set from the firebase developer console:
             - an `admin` kvp with the value set to whatever passcode you'd like to use for __admin__ access
         - a `standard` kvp with the value set to whatever passcode you'd like to share for __standard__ access

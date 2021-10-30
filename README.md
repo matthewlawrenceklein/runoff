@@ -30,7 +30,7 @@ Getting started with runoff should take ~ 15 minutes, and consists of three step
         - a `bio` collection
         - a `secrets` collection with two documents that must _always_ be set from the firebase developer console:
             - an `admin` kvp with the value set to whatever passcode you'd like to use for __admin__ access
-        - a `standard` kvp with the value set to whatever passcode you'd like to share for __standard__ access
+            - a `standard` kvp with the value set to whatever passcode you'd like to share for __standard__ access
 - from the project dashboard, navigate to __storage__ and select __rules__
     - from the __edit rules__ tab, change ln 5 of the rules object to be `allow read, write`. your storage is now configured.
 
